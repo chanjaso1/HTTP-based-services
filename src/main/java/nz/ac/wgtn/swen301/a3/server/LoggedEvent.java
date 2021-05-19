@@ -1,15 +1,16 @@
 package nz.ac.wgtn.swen301.a3.server;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class LoggedEvent implements Comparable<LoggedEvent>{
+public class LoggedEvent implements Comparable<LoggedEvent> {
 
     private String id, message, timestamp, thread, logger, level, errorDetails;
+
+
 
 
     @Override
@@ -43,7 +44,7 @@ public class LoggedEvent implements Comparable<LoggedEvent>{
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
             Date parsedDate = dateFormat.parse(timestamp);
             return new Timestamp(parsedDate.getTime());
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -56,7 +57,9 @@ public class LoggedEvent implements Comparable<LoggedEvent>{
         return logger;
     }
 
-    public String getLevel() { return level; }
+    public String getLevel() {
+        return level;
+    }
 
     public String getErrorDetails() {
         return errorDetails;
