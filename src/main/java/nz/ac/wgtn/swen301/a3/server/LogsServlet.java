@@ -36,7 +36,6 @@ public class LogsServlet extends HttpServlet {
 
             if (limit < results.size()) results = results.subList(0, limit);
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             out.println(gson.toJson(results));
 
             response.setStatus(200);
@@ -51,21 +50,24 @@ public class LogsServlet extends HttpServlet {
         try {
             BufferedReader reader = request.getReader();
             String line = "";
+
             while ((line = reader.readLine()) != null) JSONString.append(line);
+
             response.setContentType("application/json");
             LoggedEvent event = gson.fromJson(JSONString.toString(), LoggedEvent.class);
+
             assert event != null;
             assert LoggedEvent.levels.contains(event.getLevel());
             for(LoggedEvent loggedEvent : Persistency.DB){
                 if(loggedEvent.getId().equals(event.getId())){
-                    response.setStatus(409);
+                    response.setStatus(409);        //duplicate id
                     return;
                 }
             }
             Persistency.DB.add(event);
-            response.setStatus(201);
+            response.setStatus(201);                //valid object
         } catch (Exception e) {
-            response.setStatus(400);
+            response.setStatus(400);                //invalid object
         }
     }
 

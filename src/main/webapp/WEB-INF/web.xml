@@ -13,4 +13,31 @@
         <url-pattern>/logs</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>StatsCSVServlet</servlet-name>
+        <servlet-class>nz.ac.wgtn.swen301.a3.server.StatsCSVServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StatsCSVServlet</servlet-name>
+        <url-pattern>/statscsv</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StatsServlet</servlet-name>
+        <servlet-class>nz.ac.wgtn.swen301.a3.server.StatsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StatsServlet</servlet-name>
+        <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StatsXLSServlet</servlet-name>
+        <servlet-class>nz.ac.wgtn.swen301.a3.server.StatsXLSServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StatsXLSServlet</servlet-name>
+        <url-pattern>/statsxls</url-pattern>
+    </servlet-mapping>
+
 </web-app>
