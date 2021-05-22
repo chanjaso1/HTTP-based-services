@@ -7,7 +7,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -65,13 +64,11 @@ public class TestGetLogs {
 
     @Test
     public void testInValidRequestCode2() throws IOException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
 
         //valid parameters
         request.setParameter("limit", "2");
         request.setParameter("level", "HIGH");
 
-        MockHttpServletResponse response = new MockHttpServletResponse();
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
 
@@ -80,13 +77,11 @@ public class TestGetLogs {
 
     @Test
     public void testInValidRequestCode3() throws IOException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
 
         //valid parameters
         request.setParameter("limit", "2");
         request.setParameter("level", "HIGH");
 
-        MockHttpServletResponse response = new MockHttpServletResponse();
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
 
@@ -96,13 +91,11 @@ public class TestGetLogs {
 
     @Test
     public void testValidRequestCode() throws IOException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
 
         //valid parameters
         request.setParameter("limit", "2");
         request.setParameter("level", "ALL");
 
-        MockHttpServletResponse response = new MockHttpServletResponse();
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
 
@@ -111,13 +104,11 @@ public class TestGetLogs {
 
     @Test
     public void testValidRequestCode2() throws IOException {
-        MockHttpServletRequest request = new MockHttpServletRequest();
 
         //valid parameters
         request.setParameter("limit", "99999999");
         request.setParameter("level", "OFF");
 
-        MockHttpServletResponse response = new MockHttpServletResponse();
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
 
@@ -126,12 +117,9 @@ public class TestGetLogs {
 
     @Test
     public void testValidContentType() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         //valid parameters
         request.setParameter("limit", "2");
         request.setParameter("level", "ALL");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
@@ -141,11 +129,8 @@ public class TestGetLogs {
 
     @Test
     public void testReturnedValues() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("limit", "3");
         request.setParameter("level", "ALL");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
@@ -162,11 +147,8 @@ public class TestGetLogs {
 
     @Test
     public void testReturnedValues2() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("limit", "3");
         request.setParameter("level", "ERROR");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
@@ -180,13 +162,11 @@ public class TestGetLogs {
         assertTrue(events[2].contains("d126-se11-a223-bb12-x92023142"));  //logger 8
         assertEquals(3, events.length);
     }
+
     @Test
     public void testReturnedValues3() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("limit", "10");
         request.setParameter("level", "FATAL");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
@@ -202,11 +182,8 @@ public class TestGetLogs {
 
     @Test
     public void testReturnedValues4() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("limit", "99");
         request.setParameter("level", "ALL");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
@@ -230,11 +207,8 @@ public class TestGetLogs {
 
     @Test
     public void testInvalidReturnedValues1() throws IOException {
-
-        MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("limit", "0");
         request.setParameter("level", "ALL");
-        MockHttpServletResponse response = new MockHttpServletResponse();
 
         LogsServlet service = new LogsServlet();
         service.doGet(request, response);
