@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import java.io.IOException;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestPostLogs {
@@ -14,7 +12,7 @@ public class TestPostLogs {
     MockHttpServletResponse response;
 
     @Before
-    public void init(){
+    public void init() {
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
         Persistency.DB.clear();
@@ -23,7 +21,7 @@ public class TestPostLogs {
     @Test
     public void testValidAddEvent1() {
 
-        String event  = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
+        String event = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
                 "timestamp='18-10-2021 16:47:18', thread='a', logger='mainClass', level='INFO', " +
                 "errorDetails='error details'}";
 
@@ -40,7 +38,7 @@ public class TestPostLogs {
 
     @Test
     public void testValidAddEvent2() {
-        String event  = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
+        String event = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
                 "timestamp='18-10-2021 16:47:18', thread='main', logger='mainClass', level='ALL', " +
                 "errorDetails='error details'}";
 
@@ -67,7 +65,7 @@ public class TestPostLogs {
 
     @Test
     public void testInvalidAddEvent1() {
-        String event  = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
+        String event = "{id='d290f1ee-6c54-4b01-90e6-d701748f0851', message='String message', " +
                 "timestamp='18-10-2021 16:47:18', thread='a', logger='mainClass', level='OFF', " +
                 "errorDetails='error details', timeTypeLong=1609127238}";
 
@@ -88,7 +86,7 @@ public class TestPostLogs {
 
     @Test
     public void testInvalidAddEvent2() {
-        String event  = "Object";
+        String event = "Object";
 
         request.setContentType("application/json");
         request.setContent(event.getBytes());

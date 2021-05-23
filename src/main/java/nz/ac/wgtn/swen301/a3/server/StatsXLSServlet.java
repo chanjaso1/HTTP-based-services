@@ -32,14 +32,7 @@ public class StatsXLSServlet extends HttpServlet {
         Map<String, Object[]> stats = new TreeMap<>();
         stats.put("1", new Object[]{"logger", "ALL", "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "OFF"});
 
-        HashMap<String, int[]> map = new HashMap<>();
-        for (LoggedEvent loggedEvent : Persistency.DB) {
-            if (!map.containsKey(loggedEvent.getLogger())) map.put(loggedEvent.getLogger(), new int[8]);
-
-            map.get(loggedEvent.getLogger())[LoggedEvent.levels.indexOf(loggedEvent.getLevel())] += 1;
-
-
-        }
+        HashMap<String, int[]> map = Persistency.mapCountOfLogs();
 
         //get all data from database
         int row = 2;

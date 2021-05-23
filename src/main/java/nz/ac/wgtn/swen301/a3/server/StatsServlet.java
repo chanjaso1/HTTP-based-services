@@ -16,14 +16,8 @@ public class StatsServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HashMap<String, int[]> map = new HashMap<>();
 
-        //TODO remove this for later!
-        for(int i = 0; i < 50; i++){
-            Persistency.randomizeEvent();
-        }
-
         for(LoggedEvent loggedEvent : Persistency.DB){
             if(!map.containsKey(loggedEvent.getLogger())) map.put(loggedEvent.getLogger(), new int[8]);
-
             map.get(loggedEvent.getLogger())[LoggedEvent.levels.indexOf(loggedEvent.getLevel())] += 1;
         }
         PrintWriter out = response.getWriter();
