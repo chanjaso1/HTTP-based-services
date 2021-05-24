@@ -38,14 +38,13 @@ public class Client {
             else if (file.endsWith(".csv") && type.equalsIgnoreCase("csv"))  type = "csv";
             else throw new Exception();
 
-                String uri = "http://localhost:8080/resthome4logs/stats" + type;
-            System.out.println(file);
-            System.out.println(uri);
+            String uri = "http://localhost:8080/resthome4logs/stats" + type;
             createFile(file, uri);
+            System.out.println("File has been successfully created!");
 
 
         }catch (Exception ignored){
-            System.out.println("Error!");
+            System.out.println("File cannot be created");
         }
 
     }

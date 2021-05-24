@@ -66,6 +66,14 @@
             <version>3.2.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.7</version>
+        </dependency>
+
+
 
     </dependencies>
     <build>
@@ -96,6 +104,31 @@
                     <stopPort>1234</stopPort>
                 </configuration>
             </plugin>
+            <!-- Jacoco plugin (task 5) -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                prepare-agent
+                            </goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>report</goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- Creation of JAR file (task 6) -->
+            <!-- https://maven.apache.org/plugins/maven-jar-plugin/examples/attached-jar.html -->
+            <!-- https://www.baeldung.com/executable-jar-with-maven -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
