@@ -30,6 +30,6 @@ public class StatsCSVServlet extends HttpServlet {
 
         }
         out.close();
-        response.setStatus(200);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

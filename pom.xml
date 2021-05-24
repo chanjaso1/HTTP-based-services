@@ -7,6 +7,8 @@
     <version>1.0-SNAPSHOT</version>
     <name>Simple Webapp(s)</name>
     <url>http://maven.apache.org</url>
+
+
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -57,6 +59,13 @@
             <artifactId>jsoup</artifactId>
             <version>1.13.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
 
     </dependencies>
     <build>
@@ -83,14 +92,36 @@
                     <webApp>
                         <contextPath>/resthome4logs</contextPath>
                     </webApp>
+                    <stopKey>stop</stopKey>
+                    <stopPort>1234</stopPort>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <excludes>
+                        <exclude>
+                            nz/ac/wgtn/swen301/a3/server/**/*
+                        </exclude>
+                    </excludes>
+                    <finalName>resthome4logs-Client</finalName>
+                    <archive>
+                        <manifest>
+                            <mainClass>
+                                nz.ac.wgtn.swen301.a3.client.Client
+                            </mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

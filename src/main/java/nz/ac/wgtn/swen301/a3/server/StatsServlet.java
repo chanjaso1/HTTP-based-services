@@ -14,12 +14,8 @@ public class StatsServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HashMap<String, int[]> map = new HashMap<>();
+        HashMap<String, int[]> map = Persistency.mapCountOfLogs();
 
-        for(LoggedEvent loggedEvent : Persistency.DB){
-            if(!map.containsKey(loggedEvent.getLogger())) map.put(loggedEvent.getLogger(), new int[8]);
-            map.get(loggedEvent.getLogger())[LoggedEvent.levels.indexOf(loggedEvent.getLevel())] += 1;
-        }
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
         out.println("<html>  \n" +
@@ -43,6 +39,6 @@ public class StatsServlet extends HttpServlet {
                 "</body>  \n" +
                 "</html>  ");
         out.close();
-        response.setStatus(200);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

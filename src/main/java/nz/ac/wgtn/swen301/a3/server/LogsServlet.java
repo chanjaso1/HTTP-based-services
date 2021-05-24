@@ -28,7 +28,7 @@ public class LogsServlet extends HttpServlet {
 
         String l = request.getParameter("limit");
         String level = request.getParameter("level");
-        if (!check(level, l) ) response.setStatus(400);
+        if (!check(level, l) ) response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         else {
             int limit = Integer.parseInt(l);
             List<LoggedEvent> results = filter(level);
@@ -38,7 +38,7 @@ public class LogsServlet extends HttpServlet {
 
             out.println(gson.toJson(results));
 
-            response.setStatus(200);
+            response.setStatus(HttpServletResponse.SC_OK);
         }
         out.close();
     }
@@ -49,9 +49,9 @@ public class LogsServlet extends HttpServlet {
         StringBuilder JSONString = new StringBuilder();
         try {
             BufferedReader reader = request.getReader();
-            String line = "";
 
-            while ((line = reader.readLine()) != null) JSONString.append(line);
+            String line;
+            while (  (line = reader.readLine())   != null) JSONString.append(line);
 
             response.setContentType("application/json");
             LoggedEvent event = gson.fromJson(JSONString.toString(), LoggedEvent.class);
@@ -60,14 +60,15 @@ public class LogsServlet extends HttpServlet {
             assert LoggedEvent.levels.contains(event.getLevel());
             for(LoggedEvent loggedEvent : Persistency.DB){
                 if(loggedEvent.getId().equals(event.getId())){
-                    response.setStatus(409);        //duplicate id
+                    response.setStatus(HttpServletResponse.SC_CONFLICT);        //duplicate id
                     return;
                 }
             }
+
             Persistency.DB.add(event);
-            response.setStatus(201);                //valid object
+            response.setStatus(HttpServletResponse.SC_CREATED);                //valid object
         } catch (Exception e) {
-            response.setStatus(400);                //invalid object
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);                //invalid object
         }
     }
 
@@ -77,14 +78,12 @@ public class LogsServlet extends HttpServlet {
         for (LoggedEvent event : Persistency.DB) {
             if (chosenLevels.contains(event.getLevel())) results.add(event);
         }
-
         return results;
 
     }
 
     public boolean check(String level, String limit) {
         try {
-
             assert LoggedEvent.levels.contains(level);
             int lim = Integer.parseInt(limit);
             assert lim >= 0;

@@ -58,6 +58,6 @@ public class StatsXLSServlet extends HttpServlet {
 
         workbook.write(out);
         out.close();
-        response.setStatus(200);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }
