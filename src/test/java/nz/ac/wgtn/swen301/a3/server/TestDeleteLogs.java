@@ -5,14 +5,13 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import javax.servlet.http.HttpServlet;
-
 public class TestDeleteLogs {
     MockHttpServletRequest request;
     MockHttpServletResponse response;
 
     @Before
     public void init(){
+        Persistency.DB.clear();
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
     }
