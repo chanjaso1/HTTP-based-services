@@ -57,12 +57,15 @@ public class LogsServlet extends HttpServlet {
             LoggedEvent event = gson.fromJson(JSONString.toString(), LoggedEvent.class);
 
             assert event != null;
+            assert event.getMessage() != null && event.getErrorDetails() != null && event.getThread() != null;
             assert LoggedEvent.levels.contains(event.getLevel());
             for(LoggedEvent loggedEvent : Persistency.DB){
                 if(loggedEvent.getId().equals(event.getId())){
                     response.setStatus(HttpServletResponse.SC_CONFLICT);        //duplicate id
                     return;
                 }
+
+
             }
 
             Persistency.DB.add(event);

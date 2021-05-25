@@ -146,9 +146,9 @@ public class TestStatsXLS {
                     } else if (row.getRowNum() == 2) {
                         secondloggerSum += count;
                     }
-                    if (count > 0)
+                    if (count > 0) {
                         assert headers.get(cell.getColumnIndex()).equals("TRACE") || headers.get(cell.getColumnIndex()).equals("ERROR");
-
+                    }
                     countOfLogs += count;
                 } else if (cell.getColumnIndex() == 0) {
                     assert cell.getCellType() == CellType.STRING && cell.getStringCellValue().startsWith("logger #");
