@@ -139,7 +139,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>resthome4logs-Client</finalName>
+                    <finalName>resthome4logs-client</finalName>
                     <archive>
                         <manifest>
                             <mainClass>
